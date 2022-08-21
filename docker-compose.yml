@@ -56,3 +56,19 @@ services:
     volumes:
       - "/lib/modules:/lib/modules:ro"
       - "./vpn.env:/opt/src/vpn.env:ro"
+
+  mosquitto:
+    image: eclipse-mosquitto
+    restart: always
+    privileged: true
+    ports:
+      - "18883:1883/tcp"
+      - "9001:9001/tcp"
+    expose:
+      - "1883/udp"
+      - "9001/udp"
+    volumes:
+      - "./mosquitto/config:/mosquitto/config"
+      - "./mosquitto/data:/mosquitto/data"
+      - "./mosquitto/log:/mosquitto/log"
+      - "./mosquitto/mosquitto.pwd:/etc/mosquitto/mosquitto.pwd"

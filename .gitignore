@@ -1,2 +1,5 @@
 etc/ssl/
 vpn.env
+mosquitto.pwd
+mosquitto.log
+mosquitto/data
