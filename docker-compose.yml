@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   nginx:
     build: .
@@ -6,23 +6,31 @@ services:
     hostname: nginx
     restart: always
     container_name: nginx
+
     logging:
       driver: json-file
       options:
         max-size: "10m"
         max-file: "5"
+
     volumes:
-       - ./etc/ssl:/etc/nginx/ssl
-       - ./etc/service-borodin.site.conf:/etc/nginx/service.conf
+      - ./etc/ssl:/etc/nginx/ssl
+      - ./etc/service-borodin.site.conf:/etc/nginx/service.conf
+      # - ./etc/ssl:/etc/nginx/ssl
+      # - ./etc/service-example.conf:/etc/nginx/service.conf
+      # - ./etc/service-example-2.conf:/etc/nginx/service2.conf # more services, should be service*.conf
+      # - ./etc/stream-example-2.conf:/etc/nginx/stream2.conf # more streams, should be stream*.conf
+      # - ./etc/conf.d:/etc/nginx/conf.d-le # configuration folder, all files from it will be added
+      # - ./etc/stream.conf:/etc/nginx/stream.conf.d-le # streams configuration folder, all files from it will be added
     ports:
-       - "80:80"
-       - "443:443"
+      - "80:80"
+      - "443:443"
 
     environment:
-      - TZ=UTC
+      - TZ=America/Chicago
       - LETSENCRYPT=true
-      - LE_EMAIL=dmitriy@borodin.site
-      - LE_FQDN=borodin.site
+      - LE_EMAIL=name@example.com
+      - LE_FQDN=www.example.com
       #- SSL_CERT=le-crt.pem
       #- SSL_KEY=le-key.pem
       #- SSL_CHAIN_CERT=le-chain-crt.pem
@@ -47,4 +55,4 @@ services:
       - "4500/udp"
     volumes:
       - "/lib/modules:/lib/modules:ro"
-      - "../vpn.env:/opt/src/vpn.env:ro"
+      - "./vpn.env:/opt/src/vpn.env:ro"

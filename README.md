@@ -20,8 +20,16 @@ Simple nginx image (alpine based) with integrated [Let's Encrypt](https://letsen
 - you can map multiple custom config files to in compose using `service*.conf` filename pattern, 
   see `service2.conf` in [docker-compose.yml](https://github.com/nginx-le/nginx-le/blob/master/docker-compose.yml)
   file for reference
+
+  Alternatively, mount directory with `*.conf` files into `/etc/nginx/conf.d-le` directory inside
+  the container to have them all copied at once.
+- `stream*.conf` files are picked up into `/etc/nginx/stream.d/` directory and included into `stream`
+  section of the Nginx configuration, see `stream2.conf` in `docker-compose.yml` file for reference.
+  
+  Alternatively, mount directory with `*.conf` files into `/etc/nginx/conf.d-le` directory inside
+  the container to have them all copied at once.
 - pull image - `docker-compose pull`
-- if you don't want pre-built image, make you own. `docker-compose build` will do it
+- if you don't want a pre-built image, make you own. `docker-compose build` will do it
 - start it `docker-compose up`
 
 ### Configuration files variables replacement
@@ -74,3 +82,43 @@ path needed for LE challenge.
 
 - [Reverse proxy](https://github.com/umputun/nginx-le/tree/master/example/webrtc) for WebRTC solutions,
   where you need multiple ports on one domain to reach different services behind your `nginx-le` container.
+
+## Manual certificate renewal (`*.example.com`, DNS challenge)
+
+<details>
+<summary>wildcard certificate renewal</summary>
+
+
+In your `docker-compose.yml` disable automatic Let's Encrypt certificate creation/renewal.
+```yaml
+    environment:
+      - LETSENCRYPT=true
+```
+
+```shell
+# after starting nginx-le connect to it
+docker exec -it nginx sh
+
+# change `*.example.com` to your domain name
+certbot certonly \
+    --manual \
+    --manual-public-ip-logging-ok \
+    --preferred-challenges=dns \
+    --email "${LE_EMAIL}" \
+    --agree-tos \
+    -d "*.example.com"
+
+# it will ask you to create/update TXT DNS record
+# depending on your DNS provider it can take some time
+# you can check if DNS is already updated using dig utility
+dig txt _acme-challenge.example.com
+
+# copy certificates for nginx-le to use them
+cp -fv /etc/letsencrypt/live/example.com/privkey.pem /etc/nginx/ssl/le-key.pem
+cp -fv /etc/letsencrypt/live/example.com/fullchain.pem /etc/nginx/ssl/le-crt.pem
+cp -fv /etc/letsencrypt/live/example.com/chain.pem /etc/nginx/ssl/le-chain-crt.pem
+
+# use the same procedure for renewal
+```
+
+</details>
