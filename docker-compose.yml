@@ -32,7 +32,7 @@ services:
       #- SSL_KEY=le-key.pem
       #- SSL_CHAIN_CERT=le-chain-crt.pem
 
-  personal-site:
+  website:
     image: borodindmitriy/borodin.site:eca9dbffae5a6a16c9020718405df3378dec700f
     restart: always
     ports:
@@ -40,7 +40,7 @@ services:
     expose:
       - "3000"
 
-  ipsec-vpn-server:
+  ipsec:
     image: hwdsl2/ipsec-vpn-server
     restart: always
     privileged: true
