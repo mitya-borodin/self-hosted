@@ -59,8 +59,8 @@ services:
     restart: always
     privileged: true
     ports:
-      - "127.0.0.1:18883:1883/tcp"
-      - "127.0.0.1:9001:9001/tcp"
+      - "18883:1883/tcp"
+      - "9001:9001/tcp"
     volumes:
       - "./mosquitto/config:/mosquitto/config"
       - "./mosquitto/data:/mosquitto/data"
