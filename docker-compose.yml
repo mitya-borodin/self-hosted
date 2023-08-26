@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 services:
   nginx:
     build: .
@@ -59,11 +59,8 @@ services:
     restart: always
     privileged: true
     ports:
-      - "18883:1883/tcp"
-      - "9001:9001/tcp"
-    expose:
-      - "1883/udp"
-      - "9001/udp"
+      - "127.0.0.1:18883:1883/tcp"
+      - "127.0.0.1:9001:9001/tcp"
     volumes:
       - "./mosquitto/config:/mosquitto/config"
       - "./mosquitto/data:/mosquitto/data"
