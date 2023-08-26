@@ -6,13 +6,11 @@ services:
     hostname: nginx
     restart: always
     container_name: nginx
-
     logging:
       driver: json-file
       options:
         max-size: "10m"
         max-file: "5"
-
     volumes:
       - ./etc/ssl:/etc/nginx/ssl
       - ./etc/service-borodin.site.conf:/etc/nginx/service.conf
@@ -25,7 +23,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-
     environment:
       - TZ=UTC
       - LETSENCRYPT=true
