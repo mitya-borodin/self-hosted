@@ -6,6 +6,8 @@
 
 ```bash
 cp docker-compose.example.yaml docker-compose.yaml
+
+mkdir ./pg-data
 ```
 
 Задаем значение переменным:
