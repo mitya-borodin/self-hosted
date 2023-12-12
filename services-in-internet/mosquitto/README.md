@@ -12,11 +12,14 @@
 
 Придумываем username и password которые будут указаны в `mosquitto.pwd`.
 
+- username будет `wirenboard`.  
+- password будет `new-wirenboard-password`
+
 ```bash
-cp mosquitto.example.pwd mosquitto.pwd
+touch mosquitto.pwd
 ```
 
-Заменяем username и password, не то что придумали.
+При помощи утилиты `mosquitto_passwd -c ./mosquitto.pwd wirenboard`, создаем пароль для пользователя, нужно будет ввести его два раза, и пара username + password сохраняется в `./mosquitto.pwd`, причем пароль хранится в зашифрованном виде.
 
 Запускаем сервис:
 
