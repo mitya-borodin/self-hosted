@@ -1,5 +1,4 @@
-etc/ssl/
-vpn.env
+ssl
 mosquitto.pwd
 mosquitto.log
-mosquitto/data
+data
