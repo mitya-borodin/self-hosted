@@ -1,6 +1,5 @@
-# Personal website powered by nginx-ls
+# Ingress powered by nginx-ls
 
-[Personal website](https://github.com/mitya-borodin/website)
 [Nginx-ls](https://github.com/nginx-le/nginx-le)
 [Dockerfile](./Dockerfile), несет функцию документации, чтобы понимать, какие файлы участвую в образе.
 

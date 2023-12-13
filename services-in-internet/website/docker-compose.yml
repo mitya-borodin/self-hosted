@@ -1,0 +1,14 @@
+version: "3"
+
+networks:
+  website:
+    name: nginx_network
+    external: true
+
+services:
+  website:
+    container_name: website
+    image: borodindmitriy/borodin.site:eca9dbffae5a6a16c9020718405df3378dec700f
+    restart: always
+    networks:
+      - website
