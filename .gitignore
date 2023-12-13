@@ -2,3 +2,9 @@ ssl
 mosquitto.pwd
 mosquitto.log
 data
+gitea-data
+pg-data
+**/wg-easy/docker-compose.yaml
+**/gitea/docker-compose.yaml
+**/wg-easy/wg0.conf
+**/wg-easy/wg0.json
