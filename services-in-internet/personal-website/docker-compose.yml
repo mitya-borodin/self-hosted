@@ -1,10 +1,10 @@
 version: "3"
 
-# networks:
-#   nginx:
-#     name: nginx_network
-#     attachable: true
-#     driver: bridge
+networks:
+  nginx:
+    name: nginx_network
+    attachable: true
+    driver: bridge
 
 services:
   nginx:
@@ -38,12 +38,12 @@ services:
       #- SSL_CERT=le-crt.pem
       #- SSL_KEY=le-key.pem
       #- SSL_CHAIN_CERT=le-chain-crt.pem
-    # networks:
-    #   - nginx
+    networks:
+      - nginx
 
   website:
     container_name: website
     image: borodindmitriy/borodin.site:eca9dbffae5a6a16c9020718405df3378dec700f
     restart: always
-    # networks:
-    #   - nginx
+    networks:
+      - nginx
