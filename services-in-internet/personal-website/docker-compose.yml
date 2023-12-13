@@ -38,6 +38,7 @@ services:
       #- SSL_KEY=le-key.pem
       #- SSL_CHAIN_CERT=le-chain-crt.pem
     networks:
+      - nginx_default
       - nginx
 
   website:
